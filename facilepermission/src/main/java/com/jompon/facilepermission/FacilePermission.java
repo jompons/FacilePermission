@@ -17,15 +17,20 @@
 package com.jompon.facilepermission;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.PixelFormat;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -114,7 +119,8 @@ public class FacilePermission {
      * @return true if Any time user clicks Deny permissions (including the very first time).
      *         false if User selects “never asks again".
      */
-    public static boolean shouldShowRequestPermissionRationale(Activity activity, String permissions) {
+    public static boolean shouldShowRequestPermissionRationale(Activity activity, String permissions)
+    {
         return ActivityCompat.shouldShowRequestPermissionRationale(activity, permissions);
     }
 
@@ -125,7 +131,8 @@ public class FacilePermission {
      * @return true if Any time user clicks Deny permissions (including the very first time).
      *         false if User selects “never asks again".
      */
-    public static boolean shouldShowRequestPermissionRationale(Fragment fragment, String permissions) {
+    public static boolean shouldShowRequestPermissionRationale(Fragment fragment, String permissions)
+    {
         return fragment.shouldShowRequestPermissionRationale(permissions);
     }
 
@@ -134,7 +141,8 @@ public class FacilePermission {
      * @param activity of class
      * @param permissions which want check permission grant
      */
-    public static void checkSelfPermissionWrapper(Activity activity, List<String> permissions) {
+    public static void checkSelfPermissionWrapper(Activity activity, List<String> permissions)
+    {
         checkSelfPermissionWrapper(activity, permissions, null);
     }
 
@@ -165,7 +173,7 @@ public class FacilePermission {
             }
         }
     }
-    
+
     /**
      * Request permission if can otherwise open settings.
      * @param fragment of class
@@ -242,5 +250,41 @@ public class FacilePermission {
         }
 
         return requestPermissions;
+    }
+
+    @TargetApi(23)
+    public void requestDrawOverlays(Activity activity, String packageName)
+    {
+        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + packageName));
+        activity.startActivityForResult(intent, REQUEST_DRAW_OVERLAY_PERMISSION);
+    }
+
+    @TargetApi(23)
+    public void requestDrawOverlays(Fragment fragment, String packageName)
+    {
+        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + packageName));
+        fragment.startActivityForResult(intent, REQUEST_DRAW_OVERLAY_PERMISSION);
+    }
+
+    public boolean isDrawOverlayPermission(Context context){
+        /** check if we already have permission to draw over other apps */
+        if( Build.VERSION.SDK_INT == Build.VERSION_CODES.O ){
+            try {
+                WindowManager mgr = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+                if (mgr == null) return false; //getSystemService might return null
+                View viewToAdd = new View(context);
+                WindowManager.LayoutParams params = new WindowManager.LayoutParams(0, 0, android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O ?
+                        WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY : WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSPARENT);
+                viewToAdd.setLayoutParams(params);
+                mgr.addView(viewToAdd, params);
+                mgr.removeView(viewToAdd);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M || Settings.canDrawOverlays(context);
     }
 }
