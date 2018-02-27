@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btn_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Request All Permission" />
+
+    <Button
+        android:id="@+id/btn_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Request ACCESS_FINE_LOCATION Permission" />
+
+    <Button
+        android:id="@+id/btn_call"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Request CALL_PHONE Permission" />
+
+    <Button
+        android:id="@+id/btn_storage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Request WRITE_EXTERNAL_STORAGE Permission" />
+
+    <Button
+        android:id="@+id/btn_draw_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Request Draw Overlay" />
+</LinearLayout>

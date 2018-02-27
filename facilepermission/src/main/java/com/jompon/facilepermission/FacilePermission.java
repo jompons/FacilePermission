@@ -16,7 +16,6 @@
 
 package com.jompon.facilepermission;
 
-import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -31,10 +30,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class FacilePermission {
@@ -42,14 +39,7 @@ public class FacilePermission {
     public static final int REQUEST_PERMISSION = 1;
     public static final int REQUEST_DRAW_OVERLAY_PERMISSION = 2;
     public static final int REQUEST_CUSTOM = 3;
-    public static final List<String> PERMISSION_LIST = Arrays.asList(
-//            Manifest.permission.ACCESS_COARSE_LOCATION,     //permission only for NETWORK_PROVIDER
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.CALL_PHONE,
-            Manifest.permission.CAMERA,
-            Manifest.permission.READ_CONTACTS,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    );
+    public static List<String> PERMISSION_LIST = new ArrayList<>();
 
     /**
      * Request permission grant
@@ -230,7 +220,7 @@ public class FacilePermission {
      * @param packageName app
      */
     @TargetApi(23)
-    public void requestDrawOverlays(Activity activity, String packageName)
+    public static void requestDrawOverlays(Activity activity, String packageName)
     {
         Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + packageName));
         activity.startActivityForResult(intent, REQUEST_DRAW_OVERLAY_PERMISSION);
@@ -242,7 +232,7 @@ public class FacilePermission {
      * @param packageName app
      */
     @TargetApi(23)
-    public void requestDrawOverlays(Fragment fragment, String packageName)
+    public static void requestDrawOverlays(Fragment fragment, String packageName)
     {
         Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + packageName));
         fragment.startActivityForResult(intent, REQUEST_DRAW_OVERLAY_PERMISSION);
@@ -253,7 +243,7 @@ public class FacilePermission {
      * @param context source
      * @return true if user allowed permission otherwise false
      */
-    public boolean isDrawOverlayPermission(Context context){
+    public static boolean isDrawOverlayPermission(Context context){
         if( Build.VERSION.SDK_INT == Build.VERSION_CODES.O ){
             try {
                 WindowManager mgr = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);

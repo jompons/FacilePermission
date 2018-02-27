@@ -5,20 +5,26 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/btn_request_all"
+        android:id="@+id/btn_all"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Request All Permission" />
 
     <Button
-        android:id="@+id/btn_need_permission"
+        android:id="@+id/btn_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Request Need Permission" />
+        android:text="Request ACCESS_FINE_LOCATION Permission" />
 
     <Button
-        android:id="@+id/btn_need_draw_overlay"
+        android:id="@+id/btn_call"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Request Need Draw Overlay" />
+        android:text="Request CALL_PHONE Permission" />
+
+    <Button
+        android:id="@+id/btn_storage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Request WRITE_EXTERNAL_STORAGE Permission" />
 </LinearLayout>

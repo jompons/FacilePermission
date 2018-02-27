@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FacilePermission</string>
+    <string name="alert_user_allowed_draw_overlay">User allowed draw overlay</string>
 </resources>
