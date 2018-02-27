@@ -38,7 +38,6 @@ public class FacilePermission {
 
     public static final int REQUEST_PERMISSION = 1;
     public static final int REQUEST_DRAW_OVERLAY_PERMISSION = 2;
-    public static final int REQUEST_CUSTOM = 3;
     public static List<String> PERMISSION_LIST = new ArrayList<>();
 
     /**
