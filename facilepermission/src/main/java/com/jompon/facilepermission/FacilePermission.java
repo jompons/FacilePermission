@@ -143,16 +143,6 @@ public class FacilePermission {
      */
     public static void checkSelfPermissionWrapper(Activity activity, List<String> permissions)
     {
-        checkSelfPermissionWrapper(activity, permissions, null);
-    }
-
-    /**
-     * Request permission if can otherwise open settings.
-     * @param activity of class
-     * @param permissions which want check permission grant
-     * @param message that want to show toast
-     */
-    public static void checkSelfPermissionWrapper(Activity activity, List<String> permissions, String message) {
         if (!hasPermission(activity, permissions)) {
             List<String> requestPermissions = getRequestPermissions(activity, permissions);
             if( requestPermissions.size() > 0 ){
@@ -163,10 +153,6 @@ public class FacilePermission {
                     Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
                     intent.setData(uri);
                     activity.startActivityForResult(intent, REQUEST_PERMISSION);
-                    if( message != null )
-                    {
-                        Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
-                    }
                 }else{
                     checkSelfPermission(activity, permissions);
                 }
@@ -181,16 +167,6 @@ public class FacilePermission {
      */
     public static void checkSelfPermissionWrapper(Fragment fragment, List<String> permissions)
     {
-        checkSelfPermissionWrapper(fragment, permissions, null);
-    }
-
-    /**
-     * Request permission if can otherwise open settings.
-     * @param fragment of class
-     * @param permissions which want check permission grant
-     * @param message that want to show toast
-     */
-    public static void checkSelfPermissionWrapper(Fragment fragment, List<String> permissions, String message) {
         if (!hasPermission(fragment.getContext(), permissions)) {
             List<String> requestPermissions = getRequestPermissions(fragment, permissions);
             if( requestPermissions.size() > 0 ){
@@ -201,10 +177,6 @@ public class FacilePermission {
                     Uri uri = Uri.fromParts("package", fragment.getContext().getPackageName(), null);
                     intent.setData(uri);
                     fragment.startActivity(intent);
-                    if( message != null )
-                    {
-                        Toast.makeText(fragment.getContext(), message, Toast.LENGTH_LONG).show();
-                    }
                 }else{
                     checkSelfPermission(fragment, permissions);
                 }
