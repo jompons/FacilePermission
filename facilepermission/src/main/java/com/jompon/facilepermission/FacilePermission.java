@@ -252,6 +252,11 @@ public class FacilePermission {
         return requestPermissions;
     }
 
+    /**
+     * Open draw overlay permission settings page
+     * @param activity source
+     * @param packageName app
+     */
     @TargetApi(23)
     public void requestDrawOverlays(Activity activity, String packageName)
     {
@@ -259,6 +264,11 @@ public class FacilePermission {
         activity.startActivityForResult(intent, REQUEST_DRAW_OVERLAY_PERMISSION);
     }
 
+    /**
+     * Open draw overlay permission settings page
+     * @param fragment source
+     * @param packageName app
+     */
     @TargetApi(23)
     public void requestDrawOverlays(Fragment fragment, String packageName)
     {
@@ -266,8 +276,12 @@ public class FacilePermission {
         fragment.startActivityForResult(intent, REQUEST_DRAW_OVERLAY_PERMISSION);
     }
 
+    /**
+     * Check draw overlay permission
+     * @param context source
+     * @return true if user allowed permission otherwise false
+     */
     public boolean isDrawOverlayPermission(Context context){
-        /** check if we already have permission to draw over other apps */
         if( Build.VERSION.SDK_INT == Build.VERSION_CODES.O ){
             try {
                 WindowManager mgr = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
