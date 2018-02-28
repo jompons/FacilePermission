@@ -108,7 +108,7 @@ public class FacilePermission {
      * @return true if Any time user clicks Deny permissions (including the very first time).
      *         false if User selects “never asks again".
      */
-    public static boolean shouldShowRequestPermissionRationale(Activity activity, String permission)
+    public static boolean isShouldShowRequestPermission(Activity activity, String permission)
     {
         return ActivityCompat.shouldShowRequestPermissionRationale(activity, permission);
     }
@@ -120,7 +120,7 @@ public class FacilePermission {
      * @return true if Any time user clicks Deny permissions (including the very first time).
      *         false if User selects “never asks again".
      */
-    public static boolean shouldShowRequestPermissionRationale(Fragment fragment, String permission)
+    public static boolean isShouldShowRequestPermission(Fragment fragment, String permission)
     {
         return fragment.shouldShowRequestPermissionRationale(permission);
     }

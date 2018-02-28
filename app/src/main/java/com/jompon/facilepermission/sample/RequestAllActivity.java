@@ -103,7 +103,7 @@ public class RequestAllActivity extends AppCompatActivity implements View.OnClic
             case FacilePermission.REQUEST_PERMISSION:
 
                 if( !FacilePermission.isPermissionGranted(grantResults) ) {
-                    if( FacilePermission.shouldShowRequestPermissionRationale(this, permissions[0]) ) {
+                    if( FacilePermission.isShouldShowRequestPermission(this, permissions[0]) ) {
                         FacilePermission.checkSelfPermission(this, Arrays.asList(permissions));
                     }
                 }
