@@ -104,25 +104,25 @@ public class FacilePermission {
     /**
      * Check should show request permission or not
      * @param activity class
-     * @param permissions which want check
+     * @param permission which want check
      * @return true if Any time user clicks Deny permissions (including the very first time).
      *         false if User selects “never asks again".
      */
-    public static boolean shouldShowRequestPermissionRationale(Activity activity, String permissions)
+    public static boolean shouldShowRequestPermissionRationale(Activity activity, String permission)
     {
-        return ActivityCompat.shouldShowRequestPermissionRationale(activity, permissions);
+        return ActivityCompat.shouldShowRequestPermissionRationale(activity, permission);
     }
 
     /**
      * Check should show request permission or not
      * @param fragment class
-     * @param permissions which want check
+     * @param permission which want check
      * @return true if Any time user clicks Deny permissions (including the very first time).
      *         false if User selects “never asks again".
      */
-    public static boolean shouldShowRequestPermissionRationale(Fragment fragment, String permissions)
+    public static boolean shouldShowRequestPermissionRationale(Fragment fragment, String permission)
     {
-        return fragment.shouldShowRequestPermissionRationale(permissions);
+        return fragment.shouldShowRequestPermissionRationale(permission);
     }
 
     /**
